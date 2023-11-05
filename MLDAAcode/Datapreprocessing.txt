@@ -1,0 +1,39 @@
+#Data preprocessing
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import numpy as np
+from skleran.metrics import ConfusionMatrixDisplay
+from skleran.metrics import classification_report
+from skleran.metrics import accuracy_score
+
+df=pd.read_csv('Heart.csv')
+df.head()
+df.shape
+df.isnull().sum()
+df.dtypes
+
+df==0
+df[df==0]
+df[df==0].count()
+df.colums
+df['Age'].mean()
+df.describe()
+df.info()
+df.nunique()
+
+newdf=df[['age','sex','chestpain','RestBP','Chol']]
+newdf
+newdf.corr()
+
+train,test = train_test_split(df,random_state=0,test_size=0.25)
+train.shape
+test.shape
+
+from sklearn.metrics import ConfusionMatrixDisplay
+actual=list(np.ones(45))+list(np.zeros(55))
+predicted = list(np.ones(40))+list(np.zeroes(52))+list(np.ones(8))
+ConfusionMatrixDisplay.from_prediction(actual,predicted)
+
+print(classification_report(actual,predicted))
+print(accuracy_score(actual,predicted))
